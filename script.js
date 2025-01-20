@@ -36,6 +36,11 @@ let testCorrectAnswers = [
     1, 0
 ];
 
+userFileName = prompt("请输入保存CSV文件的名称（不需要扩展名）", "results");
+if (!userFileName) {  // 如果用户没有输入文件名，使用默认值
+    userFileName = "results";
+}
+
 // 页面加载后显示指导语
 document.addEventListener("DOMContentLoaded", function () {
     displayImage("image.png"); // 显示指导语图片
@@ -229,7 +234,7 @@ function exportResults() {
     const encodedUri = encodeURI(csvContent);
     const link = document.createElement("a");
     link.setAttribute("href", encodedUri);
-    link.setAttribute("download", "results.csv");
+    link.setAttribute("download", `${userFileName}.csv`);  // 使用用户输入的文件名保存
     document.body.appendChild(link);
     link.click();
 }
